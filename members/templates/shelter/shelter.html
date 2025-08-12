@@ -1,0 +1,113 @@
+{% extends "master.html" %}
+
+{% block title %}
+Flood - Shelter
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="text-primary font-weight-bold">Flood Shelter</h1>
+  </div>
+
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+            <h4 class="card-title mb-0 text-primary">Shelter Table</h4>
+            <form method="get" action="" class="d-flex">
+                <input type="text" name="q" class="form-control me-2" placeholder="Search by ID, name, or address" value="{{ query|default:'' }}">
+                <button type="submit" class="btn btn-outline-primary">Search</button>
+                {% if query %}
+                    <a href="{% url 'shelter' %}" class="btn btn-outline-secondary ms-2">Clear</a>
+                {% endif %}
+            </form>
+
+            <div class="d-flex flex-wrap">
+                <a href="{% url 'add_shelter' %}" class="btn btn-primary mb-2">Add Shelter</a>
+            </div>
+        </div>
+
+      {% if shelters %}
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead style="background-color: #004e9c; color: white;">
+            <tr>
+                <th>Shelter ID</th>
+                <th>Shelter Name</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Available</th>
+                <th>Addrress</th>
+                <th>Capacity</th>
+                <th>Water</th>
+                <th>Food</th>
+                <th>Accessible</th>
+                <th>Note</th>
+                <th colspan="3" class="text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for shelter in shelters %}
+            <tr>
+                <td>{{ shelter.id }}</td>
+                <td>{{ shelter.name }}</td>
+                <td>{{ shelter.latitude}}</td>
+                <td>{{ shelter.longitude }}</td>
+                <td>
+                  {% if shelter.available %}
+                    Yes
+                  {% else %}
+                    No
+                  {% endif %}
+                </td>
+                <td>{{ shelter.address }}</td>
+                <td>{{ shelter.capacity }}</td>
+                <td>
+                  {% if shelter.has_water %}
+                    Yes
+                  {% else %}
+                    No
+                  {% endif %}
+                </td>
+                <td>
+                  {% if shelter.has_food %}
+                    Yes
+                  {% else %}
+                    No
+                  {% endif %} 
+                </td>
+                <td>
+                  {% if shelter.is_accessible %}
+                    Yes
+                  {% else %}
+                    No
+                  {% endif %}
+                </td>
+                <td>{{ shelter.notes|default:"-" }}</td>
+                  
+            
+              <td class="text-center">
+                <a href="{% url 'edit_shelter' shelter.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+              </td>
+
+              <td class="text-center">
+                <form action="{% url 'delete_shelter' shelter.id %}" method="post" onsubmit="return confirm('Are you sure to delete this Shelter?');">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div class="alert alert-info mt-3" role="alert">
+        No shelter found.
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

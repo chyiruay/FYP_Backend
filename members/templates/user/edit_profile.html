@@ -1,0 +1,88 @@
+{% extends "master.html" %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card mx-auto shadow" style="max-width: 600px;">
+    <div class="card-header bg-primary text-white">
+      <h3 class="card-title text-center mb-0">Edit Profile</h3>
+    </div>
+    <div class="card-body">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="row">
+          <div class="col-md-6">
+            <h5 class="text-primary mb-3">Personal Information</h5>
+            
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="phone_number">Phone Number</label>
+              <input type="tel" class="form-control" id="phone_number" name="phone_number" value="{{ user.phone_number|default:'' }}">
+            </div>
+            
+            <div class="form-group">
+              <label for="gender">Gender</label>
+              <select class="form-control" id="gender" name="gender">
+                <option value="">Select Gender</option>
+                <option value="M" {% if user.gender == 'M' %}selected{% endif %}>Male</option>
+                <option value="F" {% if user.gender == 'F' %}selected{% endif %}>Female</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <h5 class="text-primary mb-3">Address Information</h5>
+            
+            <div class="form-group">
+              <label for="house_number">House Number</label>
+              <input type="text" class="form-control" id="house_number" name="house_number" value="{{ user.house_number|default:'' }}">
+            </div>
+            
+            <div class="form-group">
+              <label for="street_name">Street Name</label>
+              <input type="text" class="form-control" id="street_name" name="street_name" value="{{ user.street_name|default:'' }}">
+            </div>
+            
+            <div class="form-group">
+              <label for="residential_area">Residential Area</label>
+              <input type="text" class="form-control" id="residential_area" name="residential_area" value="{{ user.residential_area|default:'' }}">
+            </div>
+            
+            <div class="form-group">
+              <label for="postcode">Postcode</label>
+              <input type="text" class="form-control" id="postcode" name="postcode" value="{{ user.postcode|default:'' }}">
+            </div>
+            
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" class="form-control" id="city" name="city" value="{{ user.city|default:'' }}">
+            </div>
+            
+            <div class="form-group">
+              <label for="state">State</label>
+              <input type="text" class="form-control" id="state" name="state" value="{{ user.state|default:'' }}">
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-primary btn-lg px-4">Save Changes</button>
+          <a href="{% url 'profile' %}" class="btn btn-secondary btn-lg px-4 ml-2">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

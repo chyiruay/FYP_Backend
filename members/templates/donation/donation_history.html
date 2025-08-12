@@ -1,0 +1,62 @@
+{% extends "master.html" %}
+
+{% block title %}
+Flood - Donations
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="text-primary font-weight-bold">Donations History</h1>
+  </div>
+
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+            <h4 class="card-title mb-0 text-primary">Donations History Table</h4>
+            <form method="get" action="" class="d-flex">
+              <input type="text" name="q" class="form-control me-2" placeholder="Search by ID, User, Donation" value="{{ query|default:'' }}">
+              <button type="submit" class="btn btn-outline-primary">Search</button>
+              {% if query %}
+                  <a href="{% url 'history' %}" class="btn btn-outline-secondary ms-2">Clear</a>
+              {% endif %}
+            </form>
+        </div>
+
+      {% if historys %}
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead style="background-color: #004e9c; color: white;">
+            <tr>
+              <th>ID</th>
+              <th>User ID</th>
+              <th>User</th>
+              <th>Donation</th>
+              <th>Quantity</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for donation_history in historys %}
+            <tr>
+              <td>{{ donation_history.id }}</td>
+              <td>{{ donation_history.user.id }}</td>
+              <td>{{ donation_history.user}}</td>
+              <td>{{ donation_history.donation }}</td>
+              <td>{{ donation_history.quantity }}</td>
+              <td>{{ donation_history.date|date:"Y-m-d H:i:s" }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div class="alert alert-info mt-3" role="alert">
+        No donations history found.
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

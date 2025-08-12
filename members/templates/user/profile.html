@@ -1,0 +1,38 @@
+{% extends "master.html" %}
+
+{% block title %}Your Profile{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card mx-auto shadow" style="max-width: 500px;">
+    <div class="card-body">
+      <h3 class="card-title text-center mb-4">Profile</h3>
+      <ul class="list-group list-group-flush mb-3">
+        <li class="list-group-item"><strong>ID:</strong> {{ user.id }}</li>
+        <li class="list-group-item"><strong>Username:</strong> {{ user.username }}</li>
+        <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
+        <li class="list-group-item"><strong>Phone Number:</strong> {{ user.phone_number|default:"-" }}</li>
+        <li class="list-group-item"><strong>Gender:</strong> {{ user.gender|default:"-" }}</li>
+        <li class="list-group-item"><strong>Full Address:</strong> {{ user.full_address|default:"-" }}</li>
+      </ul>
+      
+      <div class="d-grid gap-3 mb-4">
+        <a href="{% url 'edit_profile' %}" class="btn btn-primary btn-lg d-flex align-items-center justify-content-center">
+          Edit Profile
+        </a>
+        <a href="{% url 'change_password_profile' %}" class="btn btn-warning btn-lg d-flex align-items-center justify-content-center">
+          Change Password
+        </a>
+      </div>
+      
+      <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-danger btn-lg w-100 d-flex align-items-center justify-content-center">
+          <i class="fas fa-sign-out-alt me-2"></i>
+          Log Out
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
