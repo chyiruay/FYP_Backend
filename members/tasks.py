@@ -22,11 +22,11 @@ def start_scheduler():
             json.dump(all_data, f, ensure_ascii=False, indent=2)
         print("✅ JSON updated.")
 
-    # ⏱️ 立即运行一次，然后每小时重复
+    # 立即运行一次，然后每小时重复
     scheduler.add_job(
-        job,
-        'interval',
-        hours=1,
+       job,
+       'interval',
+       hours=1,
         #next_run_time=datetime.now()  # 立即运行
     )
 

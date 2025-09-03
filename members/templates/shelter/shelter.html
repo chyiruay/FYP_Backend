@@ -16,7 +16,7 @@ Flood - Shelter
         <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
             <h4 class="card-title mb-0 text-primary">Shelter Table</h4>
             <form method="get" action="" class="d-flex">
-                <input type="text" name="q" class="form-control me-2" placeholder="Search by ID, name, or address" value="{{ query|default:'' }}">
+                <input type="text" name="q" class="form-control me-2" placeholder="Search by ID and name" value="{{ query|default:'' }}">
                 <button type="submit" class="btn btn-outline-primary">Search</button>
                 {% if query %}
                     <a href="{% url 'shelter' %}" class="btn btn-outline-secondary ms-2">Clear</a>

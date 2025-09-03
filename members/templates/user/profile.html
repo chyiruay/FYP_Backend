@@ -16,21 +16,14 @@
         <li class="list-group-item"><strong>Full Address:</strong> {{ user.full_address|default:"-" }}</li>
       </ul>
       
-      <div class="d-grid gap-3 mb-4">
-        <a href="{% url 'edit_profile' %}" class="btn btn-primary btn-lg d-flex align-items-center justify-content-center">
-          Edit Profile
-        </a>
-        <a href="{% url 'change_password_profile' %}" class="btn btn-warning btn-lg d-flex align-items-center justify-content-center">
-          Change Password
-        </a>
+      <div class="d-grid gap-2 mb-3">
+        <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+        <a href="{% url 'change_password_profile' %}" class="btn btn-warning">Change Password</a>
       </div>
       
       <form method="post" action="{% url 'logout' %}">
         {% csrf_token %}
-        <button type="submit" class="btn btn-outline-danger btn-lg w-100 d-flex align-items-center justify-content-center">
-          <i class="fas fa-sign-out-alt me-2"></i>
-          Log Out
-        </button>
+        <button type="submit" class="btn btn-danger btn-block">Log Out</button>
       </form>
     </div>
   </div>

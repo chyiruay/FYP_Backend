@@ -229,8 +229,7 @@ def shelter_view(request):
     if query:
         shelters = Shelter.objects.filter(
             Q(id__iexact=query) |  # 精确匹配 ID
-            Q(name__icontains=query) |  # 模糊匹配 name
-            Q(address__icontains=query)  
+            Q(name__icontains=query)  # 模糊匹配 name  
         )
     else:
         shelters = Shelter.objects.all()
