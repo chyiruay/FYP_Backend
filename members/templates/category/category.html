@@ -22,9 +22,11 @@ Flood - Category
                   <a href="{% url 'category' %}" class="btn btn-outline-secondary ms-2">Clear</a>
               {% endif %}
             </form>
+            {% if user.is_staff %}
             <div class="d-flex flex-wrap">
                 <a href="{% url 'add_category' %}" class="btn btn-primary mb-2">Add Category</a>
             </div>
+            {% endif %}
         </div>
 
       {% if categorys %}
@@ -42,17 +44,19 @@ Flood - Category
             <tr>
                 <td>{{ category.id }}</td>
                 <td>{{ category.name }}</td>
-            
-              <td class="text-center">
-                <a href="{% url 'edit_category' category.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
-              </td>
+              
+              {% if user.is_staff %}
+                <td class="text-center">
+                  <a href="{% url 'edit_category' category.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                </td>
 
-              <td class="text-center">
-                <form action="{% url 'delete_category' category.id %}" method="post" onsubmit="return confirm('Are you sure to delete this category?');">
-                  {% csrf_token %}
-                  <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
-                </form>
-              </td>
+                <td class="text-center">
+                  <form action="{% url 'delete_category' category.id %}" method="post" onsubmit="return confirm('Are you sure to delete this category?');">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                  </form>
+                </td>
+              {% endif %}
             </tr>
             {% endfor %}
           </tbody>

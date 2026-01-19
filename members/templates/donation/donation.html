@@ -48,9 +48,11 @@ Flood - Donations
                   <a href="{% url 'donation' %}" class="btn btn-outline-secondary ms-2">Clear</a>
               {% endif %}
             </form>
+            {% if user.is_staff %}
             <div class="d-flex flex-wrap">
                 <a href="{% url 'add_donation' %}" class="btn btn-primary mb-2">Add Donation</a>
             </div>
+            {% endif %}
         </div>
 
       {% if donations %}
@@ -63,7 +65,9 @@ Flood - Donations
               <th>Quantity Need</th>
               <th>Category</th>
               <th>Location</th>
+              {% if user.is_staff %}
               <th colspan="2" class="text-center">Actions</th>
+              {% endif %}
             </tr>
           </thead>
           <tbody>
@@ -74,7 +78,7 @@ Flood - Donations
               <td>{{ donation.donationQuantity }}</td>
               <td>{{ donation.category }}</td>
               <td>{{ donation.location }}</td>
-            
+              {% if user.is_staff %}
               <td class="text-center">
                 <a href="{% url 'edit_donation' donation.id %}?category={{ request.GET.category }}" class="btn btn-sm btn-outline-primary">Edit</a>
               </td>
@@ -85,6 +89,7 @@ Flood - Donations
                   <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
                 </form>
               </td>
+              {% endif %}
             </tr>
             {% endfor %}
           </tbody>

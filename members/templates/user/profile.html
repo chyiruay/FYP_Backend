@@ -21,8 +21,8 @@
         <a href="{% url 'change_password_profile' %}" class="btn btn-warning">Change Password</a>
       </div>
       
-      <form method="post" action="{% url 'logout' %}">
-        {% csrf_token %}
+        <form method="post" action="{% url 'logout' %}" onsubmit="return confirm('Are you sure you want to logout?');">
+          {% csrf_token %}
         <button type="submit" class="btn btn-danger btn-block">Log Out</button>
       </form>
     </div>

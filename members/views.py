@@ -13,6 +13,7 @@ from django.urls import reverse
 from django.db.models import Q
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 #捐赠视图
@@ -55,7 +56,7 @@ def donation_list(request):
     }
     return render(request, 'donation/donation.html', context)
 
-
+@staff_member_required
 def donate_create(request, donation_id=None):
     if request.method == 'POST':
         form = DonationRecordForm(request.POST)
@@ -76,6 +77,7 @@ def donate_create(request, donation_id=None):
             form = DonationRecordForm()
     return render(request, 'donation/donation_form.html', {'form': form})
 
+@staff_member_required
 def add_donation(request):
     if request.method == 'POST':
         form = DonationForm(request.POST)
@@ -86,6 +88,7 @@ def add_donation(request):
         form = DonationForm()
     return render(request, 'donation/add_donation.html', {'form': form})
 
+@staff_member_required
 def edit_donation(request, donation_id):
     donation = get_object_or_404(Donation, id=donation_id)
     category = request.GET.get('category', '')
@@ -104,7 +107,7 @@ def edit_donation(request, donation_id):
         'form': form,
         'category': category  
     })
-
+@staff_member_required
 def delete_donation(request, id):
   
     donation = Donation.objects.get(id=id)
@@ -145,7 +148,7 @@ def category_view(request):
         'query': query,  
     })
 
-
+@staff_member_required
 def add_category(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST)
@@ -156,6 +159,7 @@ def add_category(request):
         form = CategoryForm()
     return render(request, 'category/add_category.html', {'form': form})
 
+@staff_member_required
 def edit_category(request, category_id):
     category = get_object_or_404(Category, id=category_id)
     if request.method == 'POST':
@@ -168,6 +172,7 @@ def edit_category(request, category_id):
 
     return render(request, 'category/edit_category.html', {'form': form,})
 
+@staff_member_required
 def delete_category(request, id):
     category = Category.objects.get(id=id)
     category.delete()
@@ -195,6 +200,7 @@ def location_view(request):
         'query': query,  
     })
 
+@staff_member_required
 def add_location(request):
     if request.method == 'POST':
         form = LocationForm(request.POST)
@@ -205,6 +211,7 @@ def add_location(request):
         form = LocationForm()
     return render(request, 'location/add_location.html', {'form': form})
 
+@staff_member_required
 def edit_location(request, location_id):
     location = get_object_or_404(Location, id=location_id)
     if request.method == 'POST':
@@ -217,6 +224,7 @@ def edit_location(request, location_id):
 
     return render(request, 'location/edit_location.html', {'form': form,})
 
+@staff_member_required
 def delete_location(request, id):
     location = Location.objects.get(id=id)
     location.delete()
@@ -239,8 +247,7 @@ def shelter_view(request):
         'query': query,  
     })
 
-
-
+@staff_member_required
 def add_shelter(request):
     if request.method == 'POST':
         form = ShelterForm(request.POST)
@@ -251,6 +258,7 @@ def add_shelter(request):
         form = ShelterForm()
     return render(request, 'shelter/add_shelter.html', {'form': form})
 
+@staff_member_required
 def edit_shelter(request, shelter_id):
     shelter = get_object_or_404(Shelter, id=shelter_id)
     if request.method == 'POST':
@@ -263,6 +271,7 @@ def edit_shelter(request, shelter_id):
 
     return render(request, 'shelter/edit_shelter.html', {'form': form,})
 
+@staff_member_required
 def delete_shelter(request, id):
     shelter = Shelter.objects.get(id=id)
     shelter.delete()
@@ -325,7 +334,7 @@ def change_password_view(request):
         form = PasswordChangeForm(request.user)
     return render(request, 'user/password.html', {'form': form})
 
-@login_required
+@staff_member_required
 def edit_user(request, user_id):
     user = get_object_or_404(CustomUser, pk=user_id)
     if request.method == 'POST':

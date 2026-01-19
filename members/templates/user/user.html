@@ -35,7 +35,9 @@ Flood - Users
                         <th style="white-space: nowrap;">Full Address</th>
                         <th>Date Joined</th>
                         <th>Last Login</th>
+                        {% if user.is_staff %}
                         <th colspan="2" class="text-center">Actions</th>
+                        {% endif %}
                         </tr>
                     </thead>
                     <tbody>
@@ -49,17 +51,18 @@ Flood - Users
                             <td>{{ u.full_address|default:"-" }}</td>
                             <td>{{ u.date_joined|date:"Y-m-d" }}</td>
                             <td>{{ u.last_login|date:"Y-m-d" }}</td>
-
-                        <td class="text-center">
-                            <a href="{% url 'edit_user' u.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
-                        </td>
-                        <td class="text-center">
-                            <form action="{% url 'delete_user' u.id %}" method="post"
-                            onsubmit="return confirm('Are you sure to delete this user?');">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
-                            </form>
-                        </td>
+                        {% if user.is_staff %}
+                            <td class="text-center">
+                                <a href="{% url 'edit_user' u.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                            </td>
+                            <td class="text-center">
+                                <form action="{% url 'delete_user' u.id %}" method="post"
+                                onsubmit="return confirm('Are you sure to delete this user?');">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                </form>
+                            </td>
+                        {% endif %}
                         </tr>
                         {% endfor %}
                     </tbody>

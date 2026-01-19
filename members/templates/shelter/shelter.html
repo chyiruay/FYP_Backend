@@ -22,10 +22,11 @@ Flood - Shelter
                     <a href="{% url 'shelter' %}" class="btn btn-outline-secondary ms-2">Clear</a>
                 {% endif %}
             </form>
-
+            {% if user.is_staff %}
             <div class="d-flex flex-wrap">
                 <a href="{% url 'add_shelter' %}" class="btn btn-primary mb-2">Add Shelter</a>
             </div>
+            {% endif %}
         </div>
 
       {% if shelters %}
@@ -44,7 +45,9 @@ Flood - Shelter
                 <th>Food</th>
                 <th>Accessible</th>
                 <th>Note</th>
+                {% if user.is_staff %}
                 <th colspan="3" class="text-center">Actions</th>
+                {% endif %}
             </tr>
           </thead>
           <tbody>
@@ -86,7 +89,7 @@ Flood - Shelter
                 </td>
                 <td>{{ shelter.notes|default:"-" }}</td>
                   
-            
+              {% if user.is_staff %}
               <td class="text-center">
                 <a href="{% url 'edit_shelter' shelter.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
               </td>
@@ -97,6 +100,7 @@ Flood - Shelter
                   <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
                 </form>
               </td>
+              {% endif %}
             </tr>
             {% endfor %}
           </tbody>
