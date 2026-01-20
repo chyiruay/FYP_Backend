@@ -22,9 +22,11 @@ Flood - Location
                     <a href="{% url 'location' %}" class="btn btn-outline-secondary ms-2">Clear</a>
                 {% endif %}
             </form>
+            {% if user.is_staff %}
             <div class="d-flex flex-wrap">
                 <a href="{% url 'add_location' %}" class="btn btn-primary mb-2">Add Location</a>
             </div>
+            {% endif %}
         </div>
 
       {% if locations %}
