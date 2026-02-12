@@ -27,7 +27,7 @@ class RegisterView(generics.CreateAPIView):
     def perform_create(self, serializer):
         user = serializer.save()
         token = Token.objects.create(user=user)
-        self.token = token.key  # 将token传递给response
+        self.token = token.key  
 
     def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
@@ -36,13 +36,13 @@ class RegisterView(generics.CreateAPIView):
         return response
 
 class LoginView(generics.GenericAPIView):
-    serializer_class = LoginSerializer  # 指定序列化器
+    serializer_class = LoginSerializer 
     permission_classes = [AllowAny]
     authentication_classes = []
 
     def post(self, request):
-        serializer = self.get_serializer(data=request.data)  # 使用父类方法
-        serializer.is_valid(raise_exception=True)  # 自动返回400错误
+        serializer = self.get_serializer(data=request.data) 
+        serializer.is_valid(raise_exception=True)  
         user = serializer.validated_data['user']
         token, _ = Token.objects.get_or_create(user=user)
         return Response({
