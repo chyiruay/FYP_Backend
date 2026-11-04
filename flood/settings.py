@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -19,13 +20,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&xum)y34#w1%steq0qgggk*&1&51l=t6p=sdedu%1v0hz!9y7f'
+# Read from the environment so no real key lives in version control. The fallback is a
+# throwaway for `runserver` only — anything deployed must set DJANGO_SECRET_KEY.
+# The previous hard-coded key is burned: it sat in a public repo and must not be reused.
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY',
+    'django-insecure-local-dev-only-do-not-deploy-with-this',
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ["127.0.0.1", "10.0.2.2", "localhost", "*"]
+# 10.0.2.2 is how the Android emulator reaches the host machine. Add your LAN IP here
+# when testing on a physical device. "*" was removed: it accepts any Host header.
+ALLOWED_HOSTS = os.environ.get(
+    'DJANGO_ALLOWED_HOSTS',
+    '127.0.0.1,10.0.2.2,localhost',
+).split(',')
 
 
 # Application definition

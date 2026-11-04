@@ -1,0 +1,22 @@
+# Database — never commit this. It held real user addresses and phone numbers.
+db.sqlite3
+*.sqlite3
+
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.venv/
+env/
+
+# Uploads
+/media/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
