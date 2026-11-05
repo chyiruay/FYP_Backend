@@ -1,0 +1,410 @@
+[
+{
+  "model": "members.category",
+  "pk": 1,
+  "fields": {
+    "name": "Food"
+  }
+},
+{
+  "model": "members.category",
+  "pk": 2,
+  "fields": {
+    "name": "Medicine"
+  }
+},
+{
+  "model": "members.category",
+  "pk": 3,
+  "fields": {
+    "name": "Hygiene"
+  }
+},
+{
+  "model": "members.category",
+  "pk": 4,
+  "fields": {
+    "name": "Baby or Child Care"
+  }
+},
+{
+  "model": "members.location",
+  "pk": 1,
+  "fields": {
+    "house_number": "62",
+    "street_name": "Jalan Subang",
+    "residential_area": "Taman Perindustrian Usj",
+    "postcode": "47634",
+    "city": "Subang Jaya",
+    "state": "Selangor"
+  }
+},
+{
+  "model": "members.location",
+  "pk": 2,
+  "fields": {
+    "house_number": "66",
+    "street_name": "Persiaran Medini",
+    "residential_area": "Bandar Medini Iskandar",
+    "postcode": "79938",
+    "city": "Nusajaya",
+    "state": "Johor"
+  }
+},
+{
+  "model": "members.location",
+  "pk": 3,
+  "fields": {
+    "house_number": "90",
+    "street_name": "Jalan Sarjana",
+    "residential_area": "Taman Connaught",
+    "postcode": "53701",
+    "city": "Cheras",
+    "state": "Wilayah Persekutuan Kuala Lumpur"
+  }
+},
+{
+  "model": "members.location",
+  "pk": 5,
+  "fields": {
+    "house_number": "91",
+    "street_name": "Jalan Kebun Teh",
+    "residential_area": "Taman Kebun Teh",
+    "postcode": "80250",
+    "city": "Johor Bahru",
+    "state": "Johor Darul Ta'zim"
+  }
+},
+{
+  "model": "members.location",
+  "pk": 6,
+  "fields": {
+    "house_number": "Batu 8 1/2",
+    "street_name": "Skudai Hwy",
+    "residential_area": "Taman Ungku Tun Aminah",
+    "postcode": "81300",
+    "city": "Skudai",
+    "state": "Johor"
+  }
+},
+{
+  "model": "members.location",
+  "pk": 7,
+  "fields": {
+    "house_number": "JPK 5739",
+    "street_name": "Jalan Pahlawan 17",
+    "residential_area": "aman Ungku Tun Aminah",
+    "postcode": "81300",
+    "city": "Skudai",
+    "state": "Johor Darul Ta'zim"
+  }
+},
+{
+  "model": "members.donation",
+  "pk": 2,
+  "fields": {
+    "donationName": "Water Bottle",
+    "donationQuantity": 50,
+    "category": 1,
+    "location": 2
+  }
+},
+{
+  "model": "members.donation",
+  "pk": 5,
+  "fields": {
+    "donationName": "Biscuits",
+    "donationQuantity": 200,
+    "category": 1,
+    "location": 2
+  }
+},
+{
+  "model": "members.donation",
+  "pk": 6,
+  "fields": {
+    "donationName": "Instant Noodles",
+    "donationQuantity": 200,
+    "category": 1,
+    "location": 6
+  }
+},
+{
+  "model": "members.donation",
+  "pk": 7,
+  "fields": {
+    "donationName": "Toothbrush & Toothpaste",
+    "donationQuantity": 250,
+    "category": 1,
+    "location": 1
+  }
+},
+{
+  "model": "members.donation",
+  "pk": 8,
+  "fields": {
+    "donationName": "First Aid Kits",
+    "donationQuantity": 100,
+    "category": 2,
+    "location": 7
+  }
+},
+{
+  "model": "members.donation",
+  "pk": 9,
+  "fields": {
+    "donationName": "Soap Bars",
+    "donationQuantity": 250,
+    "category": 3,
+    "location": 1
+  }
+},
+{
+  "model": "members.donation",
+  "pk": 10,
+  "fields": {
+    "donationName": "Biscuits",
+    "donationQuantity": 200,
+    "category": 1,
+    "location": 3
+  }
+},
+{
+  "model": "members.donation",
+  "pk": 17,
+  "fields": {
+    "donationName": "Milo",
+    "donationQuantity": 150,
+    "category": 1,
+    "location": 3
+  }
+},
+{
+  "model": "members.donation",
+  "pk": 23,
+  "fields": {
+    "donationName": "Milo",
+    "donationQuantity": 250,
+    "category": 1,
+    "location": 6
+  }
+},
+{
+  "model": "members.donation",
+  "pk": 30,
+  "fields": {
+    "donationName": "Water Bottle",
+    "donationQuantity": 10,
+    "category": 2,
+    "location": 2
+  }
+},
+{
+  "model": "members.shelter",
+  "pk": 1,
+  "fields": {
+    "name": "SJK(C) Foon Yew 1",
+    "latitude": 1.4968631509402794,
+    "longitude": 103.76240255646965,
+    "available": false,
+    "address": "91, Jalan Kebun Teh, Taman Kebun Teh, 80250 Johor Bahru, Johor Darul Ta'zim",
+    "capacity": 500,
+    "has_water": false,
+    "has_food": false,
+    "is_accessible": false,
+    "notes": ""
+  }
+},
+{
+  "model": "members.shelter",
+  "pk": 2,
+  "fields": {
+    "name": "SK Taman Suria",
+    "latitude": 1.5022550763108005,
+    "longitude": 103.76238683373751,
+    "available": true,
+    "address": "Jalan Suria Utama, Taman Suria, 80250 Johor Bahru, Johor Darul Ta'zim",
+    "capacity": 500,
+    "has_water": false,
+    "has_food": false,
+    "is_accessible": false,
+    "notes": ""
+  }
+},
+{
+  "model": "members.shelter",
+  "pk": 3,
+  "fields": {
+    "name": "SK Taman Impian Emas",
+    "latitude": 1.5395803544525901,
+    "longitude": 103.68506229501062,
+    "available": false,
+    "address": "SK Taman Impian Emas Jalan Impian Emas 10, Taman Impian Emas, 81300 Johor Bahru, Johor",
+    "capacity": 500,
+    "has_water": false,
+    "has_food": false,
+    "is_accessible": false,
+    "notes": ""
+  }
+},
+{
+  "model": "members.shelter",
+  "pk": 4,
+  "fields": {
+    "name": "SK Taman Anggerik",
+    "latitude": 1.537411566076901,
+    "longitude": 103.69564391988328,
+    "available": true,
+    "address": "Jalan Bukit Kempas Utama, Taman Anggerik, 81200 Johor Bahru, Johor Darul Ta'zim",
+    "capacity": 500,
+    "has_water": false,
+    "has_food": false,
+    "is_accessible": false,
+    "notes": ""
+  }
+},
+{
+  "model": "members.shelter",
+  "pk": 5,
+  "fields": {
+    "name": "SJK (C) Kuo Kuang",
+    "latitude": 1.528046235337106,
+    "longitude": 103.67185433936399,
+    "available": true,
+    "address": "Batu 8 1/2, Skudai Hwy, Taman Ungku Tun Aminah, 81300 Skudai, Johor",
+    "capacity": 500,
+    "has_water": false,
+    "has_food": false,
+    "is_accessible": false,
+    "notes": "Priority is given to the elderly and children"
+  }
+},
+{
+  "model": "members.shelter",
+  "pk": 6,
+  "fields": {
+    "name": "Pintu A SJK (C) Kuo Kuang",
+    "latitude": 1.5272740337160589,
+    "longitude": 103.67339929165882,
+    "available": true,
+    "address": "Taman Sutera Utama, 81300 Skudai, Johor",
+    "capacity": 400,
+    "has_water": false,
+    "has_food": false,
+    "is_accessible": false,
+    "notes": ""
+  }
+},
+{
+  "model": "members.shelter",
+  "pk": 7,
+  "fields": {
+    "name": "SK Sri Skudai",
+    "latitude": 1.5485191974531238,
+    "longitude": 103.6529681797622,
+    "available": true,
+    "address": "Jalan Tembaga Kuning 1, Taman Sri Skudai, 81300 Skudai, Johor Darul Ta'zim",
+    "capacity": 400,
+    "has_water": false,
+    "has_food": false,
+    "is_accessible": false,
+    "notes": ""
+  }
+},
+{
+  "model": "members.shelter",
+  "pk": 8,
+  "fields": {
+    "name": "SK Taman Tun Aminah 2",
+    "latitude": 1.5073349507067757,
+    "longitude": 103.65416399140827,
+    "available": true,
+    "address": "Jalan Hulubalang 10, Taman Ungku Tun Aminah, 81300 Skudai, Johor Darul Ta'zim",
+    "capacity": 300,
+    "has_water": false,
+    "has_food": false,
+    "is_accessible": false,
+    "notes": ""
+  }
+},
+{
+  "model": "members.shelter",
+  "pk": 9,
+  "fields": {
+    "name": "SJK(C) Kuo Kuang 2",
+    "latitude": 1.5039837258662092,
+    "longitude": 103.67298659879899,
+    "available": true,
+    "address": "Jalan Persisiran Sungai Danga, Taman Sutera Utama, 81300 Skudai, Johor",
+    "capacity": 500,
+    "has_water": false,
+    "has_food": false,
+    "is_accessible": false,
+    "notes": ""
+  }
+},
+{
+  "model": "members.shelter",
+  "pk": 10,
+  "fields": {
+    "name": "Sekolah Kebangsaan Pendidikan Khas (SKPK) Johor Bahru",
+    "latitude": 1.5198826498263391,
+    "longitude": 103.66319552931493,
+    "available": true,
+    "address": "JPK 5739, Jalan Pahlawan 17, Taman Ungku Tun Aminah, 81300 Skudai, Johor Darul Ta'zim",
+    "capacity": 500,
+    "has_water": false,
+    "has_food": false,
+    "is_accessible": false,
+    "notes": ""
+  }
+},
+{
+  "model": "members.shelter",
+  "pk": 11,
+  "fields": {
+    "name": "SK Taman Tun Aminah",
+    "latitude": 1.5228347432742222,
+    "longitude": 103.66869340581779,
+    "available": true,
+    "address": "2, Jalan Pahlawan 4, Taman Ungku Tun Aminah, 81300 Skudai, Johor Darul Ta'zim",
+    "capacity": 500,
+    "has_water": false,
+    "has_food": false,
+    "is_accessible": false,
+    "notes": "Priority is given to the elderly and children"
+  }
+},
+{
+  "model": "members.shelter",
+  "pk": 12,
+  "fields": {
+    "name": "SJK(C) Pu Sze",
+    "latitude": 1.536379073138459,
+    "longitude": 103.66289129695136,
+    "available": true,
+    "address": "Jalan Haruan, Skudai, 81300 Johor Bahru, Johor Darul Ta'zim",
+    "capacity": 400,
+    "has_water": false,
+    "has_food": false,
+    "is_accessible": false,
+    "notes": ""
+  }
+},
+{
+  "model": "members.shelter",
+  "pk": 13,
+  "fields": {
+    "name": "SK Taman Tampoi Utama",
+    "latitude": 1.5174315103355596,
+    "longitude": 103.68238926318841,
+    "available": true,
+    "address": "Jalan Titiwangsa 22, Taman Tampoi Indah, 81200 Johor Bahru, Johor Darul Ta'zim",
+    "capacity": 500,
+    "has_water": false,
+    "has_food": false,
+    "is_accessible": false,
+    "notes": ""
+  }
+}
+]

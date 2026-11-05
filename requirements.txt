@@ -1,0 +1,10 @@
+# Django 5.1 needs Python 3.10+. On Python 3.9, pin Django==4.2.30 instead — the project
+# runs on either.
+Django==5.1.*
+djangorestframework==3.16.1
+# [binary] ships prebuilt wheels, so no local PostgreSQL build toolchain is needed.
+psycopg[binary]==3.2.*
+django-cors-headers==4.9.0
+selenium==4.36.0
+beautifulsoup4==4.15.0
+APScheduler==3.11.3

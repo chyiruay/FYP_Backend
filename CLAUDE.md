@@ -23,9 +23,9 @@ Neither calls the other.
 - **The old `SECRET_KEY` sat in a public repo and must never be reused.** `settings.py` now
   reads `DJANGO_SECRET_KEY` from the environment with a throwaway dev fallback. Anything
   deployed must set the env var.
-- **`db.sqlite3` is committed in 5 historical commits** and is only `.gitignore`d going
-  forward. It has 10 user rows; the user confirmed the data is fabricated. Removing it from
-  history needs `git filter-repo`.
+- **`db.sqlite3` is committed in 5 historical commits.** It is now untracked and `.gitignore`d,
+  but the historical copies remain — they hold 10 user rows (confirmed fabricated). Removing
+  them from history needs `git filter-repo`.
 - `DEBUG` and `ALLOWED_HOSTS` now come from env too. `"*"` was removed from `ALLOWED_HOSTS` —
   it accepts any `Host` header.
 
@@ -108,21 +108,28 @@ Postgres + PostGIS over MySQL if the database is ever migrated off SQLite.
 ## Commands
 
 ```bash
-# No requirements.txt exists yet — this is the main onboarding blocker.
-# Needed at minimum: django, djangorestframework, django-cors-headers,
-# selenium, beautifulsoup4
+pip install -r requirements.txt
 python manage.py migrate
+python manage.py loaddata seed            # categories, locations, donations, 13 shelters
+python manage.py createsuperuser          # no users in the seed — make your own
 python manage.py runserver 0.0.0.0:8000   # 0.0.0.0 so a phone on the LAN can reach it
-python manage.py createsuperuser
 ```
+
+`members/fixtures/seed.json` replaces the committed `db.sqlite3` as the way to get a working
+database. It holds only reference data — **no users**, since password hashes don't belong in
+a public repo, and no `DonationRecord`/`DonationHistory`, which are per-user activity.
+
+`WaterLevel` is **not** in the seed: `WaterLevelAPI` reads `data/banjir_data.json` (committed)
+and never queries that table, so its rows are dead cache.
 
 `runserver` must bind `0.0.0.0`, not the default `127.0.0.1`, for a real device to connect.
 `10.0.2.2` in `ALLOWED_HOSTS` is how the Android emulator reaches the host machine.
 
 ## Known issues
 
-- **No `requirements.txt`, `Pipfile` or `pyproject.toml`.** Nobody can install this after a
-  clone, including you on a new machine.
+- `db.sqlite3` is no longer tracked — build a local one with `migrate` + `loaddata seed`. The
+  **5 historical copies are still in git history** on a public repo, so purging them needs
+  `git filter-repo` and a force-push.
 - **No tests.** `members/tests.py` and `accounts/tests.py` are the empty Django stubs.
 - `DATABASES` is still SQLite. Fine locally; it will not survive an ephemeral deploy host,
   and SQLite serialises writes.
