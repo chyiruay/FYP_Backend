@@ -149,12 +149,19 @@ class BanjirStateAPIView(APIView):
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class StateListView(APIView):
+    permission_classes = [AllowAny]  # public reference data
+
     def get(self, request):
         return Response([{"code": code, "name": name} for code, name in STATES])
 
 class WaterLevelAPI(APIView):
     """Latest scraped snapshot for one state. Data is written by the
-    scrape_water_levels management command, never scraped per request."""
+    scrape_water_levels management command, never scraped per request.
+
+    Public: this is public-safety data from a public government site, so
+    anyone checking for floods shouldn't need an account."""
+
+    permission_classes = [AllowAny]
 
     def get(self, request):
         state = request.GET.get("state")

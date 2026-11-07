@@ -50,9 +50,16 @@ class WaterLevelAPITests(TestCase):
         res = self.client.get("/api/water-level/")
         self.assertEqual(res.status_code, 400)
 
-    def test_requires_login(self):
+    def test_is_public(self):
+        WaterLevel.objects.create(**make_row())
         res = APIClient().get("/api/water-level/", {"state": "JHR"})
-        self.assertEqual(res.status_code, 401)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(len(res.json()), 1)
+
+    def test_state_list_is_public(self):
+        res = APIClient().get("/api/states/")
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(len(res.json()), 16)
 
 
 class ScrapeCommandTests(TestCase):

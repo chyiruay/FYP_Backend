@@ -121,8 +121,8 @@ All endpoints are under `/api/` and need `Authorization: Token <token>` unless m
 | POST | `donation-records/` | Pledge a quantity of an item |
 | GET | `donation-history/` | The logged-in user's donations |
 | GET | `shelters/` | All flood shelters with coordinates and availability *(public)* |
-| GET | `states/` | State codes and names |
-| GET | `water-level/?state=JHR` | Latest water-level snapshot for a state |
+| GET | `states/` | State codes and names *(public)* |
+| GET | `water-level/?state=JHR` | Latest water-level snapshot for a state *(public)* |
 | GET | `users/` | All users *(admin only)* |
 
 ## Known limitations
