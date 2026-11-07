@@ -1,6 +1,6 @@
 # members/api_views.py
 from rest_framework import generics, permissions, status
-from .models import Donation, DonationRecord, CustomUser, DonationHistory, Shelter
+from .models import Donation, DonationRecord, CustomUser, DonationHistory, Shelter, WaterLevel
 from rest_framework.response import Response
 from .serializers import (
     DonationSerializer, DonationRecordSerializer, RegisterSerializer, CustomUserSerializer, LoginSerializer,
@@ -13,8 +13,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
-from .banjir_api import scrape_state_banjir_data
-import json
+from .banjir_api import STATES, scrape_state_banjir_data
 from django.conf import settings
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import update_last_login
@@ -151,41 +150,27 @@ class BanjirStateAPIView(APIView):
 
 class StateListView(APIView):
     def get(self, request):
-        states = [
-            {"code": "JHR", "name": "Johor"},
-            {"code": "KDH", "name": "Kedah"},
-            {"code": "KTN", "name": "Kelantan"},
-            {"code": "MLK", "name": "Melaka"},
-            {"code": "NSN", "name": "Negeri Sembilan"},
-            {"code": "PHG", "name": "Pahang"},
-            {"code": "PRK", "name": "Perak"},
-            {"code": "PLS", "name": "Perlis"},
-            {"code": "PNG", "name": "Pulau Pinang"},
-            {"code": "SBH", "name": "Sabah"},
-            {"code": "SWK", "name": "Sarawak"},
-            {"code": "SGR", "name": "Selangor"},
-            {"code": "TRG", "name": "Terengganu"},
-            {"code": "KUL", "name": "Kuala Lumpur"},
-            {"code": "LBN", "name": "Labuan"},
-            {"code": "PJY", "name": "Putrajaya"},
-        ]
-        return Response(states)
+        return Response([{"code": code, "name": name} for code, name in STATES])
 
 class WaterLevelAPI(APIView):
+    """Latest scraped snapshot for one state. Data is written by the
+    scrape_water_levels management command, never scraped per request."""
+
     def get(self, request):
         state = request.GET.get("state")
         if not state:
             return Response({"error": "state is required"}, status=400)
 
-        try:
-            with open("data/banjir_data.json", "r", encoding="utf-8") as f:
-                all_data = json.load(f)
-            filtered_data = [entry for entry in all_data if entry.get("state_code") == state]
-            return Response(filtered_data)
-        except FileNotFoundError:
-            return Response({"error": "Data file not found."}, status=500)
-        except Exception as e:
-            return Response({"error": str(e)}, status=500)
+        latest = (
+            WaterLevel.objects.filter(state_code=state)
+            .order_by("-scraped_at")
+            .values_list("scraped_at", flat=True)
+            .first()
+        )
+        if latest is None:
+            return Response([])
+        rows = WaterLevel.objects.filter(state_code=state, scraped_at=latest)
+        return Response(WaterLevelSerializer(rows, many=True).data)
 
 class DonationHistoryView(APIView):
     permission_classes = [IsAuthenticated]

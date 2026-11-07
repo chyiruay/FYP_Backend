@@ -5,17 +5,42 @@ from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 import time
 
+# (code, name) for every state the source site covers.
+STATES = [
+    ("JHR", "Johor"),
+    ("KDH", "Kedah"),
+    ("KTN", "Kelantan"),
+    ("MLK", "Melaka"),
+    ("NSN", "Negeri Sembilan"),
+    ("PHG", "Pahang"),
+    ("PRK", "Perak"),
+    ("PLS", "Perlis"),
+    ("PNG", "Pulau Pinang"),
+    ("SBH", "Sabah"),
+    ("SWK", "Sarawak"),
+    ("SGR", "Selangor"),
+    ("TRG", "Terengganu"),
+    ("KUL", "Kuala Lumpur"),
+    ("LBN", "Labuan"),
+    ("PJY", "Putrajaya"),
+]
+
 def scrape_state_banjir_data(state_code):
     options = Options()
     options.add_argument("--headless")
     options.add_argument("--disable-gpu")
 
     driver = webdriver.Chrome(options=options)
-    url = f"https://publicinfobanjir.water.gov.my/aras-air/data-paras-air/?state={state_code}&lang=en"
-    driver.get(url)
-    time.sleep(3)
-    html = driver.page_source
-    driver.quit()
+    # The source site is slow; without a limit a hung page blocks the whole run.
+    driver.set_page_load_timeout(60)
+    url =f"https://publicinfobanjir.water.gov.my/aras-air/data-paras-air/?state={state_code}&lang=en"
+    try:
+        driver.get(url)
+        time.sleep(3)
+        html = driver.page_source
+    finally:
+        # Always close Chrome, or failed runs leak browser processes.
+        driver.quit()
 
     soup = BeautifulSoup(html, "html.parser")
     rows = soup.find_all("tr", class_="item")

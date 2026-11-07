@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth import get_user_model
 
@@ -106,4 +107,12 @@ class WaterLevel(models.Model):
     warning = models.CharField(max_length=10)
     danger = models.CharField(max_length=10)
     state_code = models.CharField(max_length=10)
-    
+    # When our scraper fetched this row. Each run stores a new snapshot, so
+    # rows sharing a scraped_at form one reading of a state.
+    scraped_at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        indexes = [models.Index(fields=["state_code", "-scraped_at"])]
+
+    def __str__(self):
+        return f"{self.station_name} ({self.state_code}) {self.water_level}"
