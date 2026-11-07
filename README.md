@@ -8,7 +8,6 @@ Django backend for a flood-preparedness app in Malaysia. It serves:
   and users
 - a **scraper** that collects water-level readings for all 16 states every hour
 
-<!-- Add a screenshot of the staff dashboard to docs/screenshots/ -->
 ![Staff dashboard](docs/screenshots/dashboard.png)
 
 ## Architecture
