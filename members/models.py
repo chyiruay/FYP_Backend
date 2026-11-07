@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth import get_user_model
 
-#用户模型
+# User
 class CustomUser(AbstractUser):
     house_number = models.CharField(max_length=20, blank=True, null=True)
     street_name = models.CharField(max_length=100, blank=True, null=True)
@@ -20,7 +20,7 @@ class CustomUser(AbstractUser):
             self.city,
             self.state
         ]
-        # 过滤掉空或 None 的字段
+        # Skip empty or None fields
         return ', '.join([part for part in parts if part])
 
     phone_number = models.CharField(max_length=20, blank=True)
@@ -31,14 +31,14 @@ class CustomUser(AbstractUser):
     def __str__(self):
       return self.username
     
-#分类模型  
+# Category  
 class Category(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
     
-#地址模型
+# Location
 class Location(models.Model):
     house_number = models.CharField(max_length=10)
     street_name = models.CharField(max_length=100)
@@ -50,7 +50,7 @@ class Location(models.Model):
     def __str__(self):
         return f"{self.house_number}, {self.street_name}, {self.residential_area}, {self.postcode}, {self.city}, {self.state}"
 
-#捐赠模型
+# Donation
 class Donation(models.Model):
     donationName = models.CharField(max_length=100)
     donationQuantity = models.IntegerField()
@@ -76,7 +76,7 @@ class DonationHistory(models.Model):
     def __str__(self):
         return f"{self.user.username} donated {self.quantity} of {self.donation.donationName} on {self.date}"
 
-#避难所
+# Shelter
 class Shelter(models.Model):
     name = models.CharField(max_length=100)
     latitude = models.FloatField()
@@ -92,7 +92,7 @@ class Shelter(models.Model):
     def __str__(self):
         return self.name
 
-#水位
+# Water level
 class WaterLevel(models.Model):
     station_id = models.CharField(max_length=20)
     station_name = models.CharField(max_length=200)

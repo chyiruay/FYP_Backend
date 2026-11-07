@@ -16,7 +16,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.admin.views.decorators import staff_member_required
 
 
-#捐赠视图
+# Donation views
 def donation_list(request):
     query = request.GET.get('q', '').strip()
     category_id = request.GET.get('category')
@@ -64,7 +64,7 @@ def donate_create(request, donation_id=None):
             donation_record = form.save(commit=False)
             donation = donation_record.donation
 
-            # 减库存
+            # Decrease stock
             donation.donationQuantity -= int(donation_record.quantity)
             donation.save()
 
@@ -131,7 +131,7 @@ def donation_history(request):
         'query': query,  
     })
 
-#category视图
+# Category views
 def category_view(request):
     query = request.GET.get('q') 
 
@@ -178,7 +178,7 @@ def delete_category(request, id):
     category.delete()
     return redirect('category') 
 
-#location视图
+# Location views
 def location_view(request):
     query = request.GET.get('q') 
 
@@ -236,8 +236,8 @@ def shelter_view(request):
 
     if query:
         shelters = Shelter.objects.filter(
-            Q(id__iexact=query) |  # 精确匹配 ID
-            Q(name__icontains=query)  # 模糊匹配 name  
+            Q(id__iexact=query) |  # exact ID match
+            Q(name__icontains=query)  # partial name match  
         )
     else:
         shelters = Shelter.objects.all()
@@ -277,7 +277,7 @@ def delete_shelter(request, id):
     shelter.delete()
     return redirect('shelter') 
 
-#用户视图
+# User views
 def user_list(request):
     query = request.GET.get('q') 
 

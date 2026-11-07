@@ -2,7 +2,7 @@ from django import forms
 from .models import Donation, DonationRecord, CustomUser, Category, Location, Shelter
 from django.contrib.auth.forms import UserCreationForm
 
-# 表单：注册用户用（使用 CustomUser）
+# User registration form (uses CustomUser)
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
@@ -25,7 +25,7 @@ class UserEditForm(forms.ModelForm):
             'state': 'State',
         }
 
-# 捐赠
+# Donation
 class DonationRecordForm(forms.ModelForm):
     class Meta:
         model = DonationRecord
